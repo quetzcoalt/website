@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="stylesheet" href="../style.css">
+    <script type="module" src="../components/NavBar.js" defer></script>
+    <script type="module" src="../components/MusicPlayer.js" defer></script>
+    <script type="module" src="../components/Books.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>now;</title>
+</head>
+<body>
+    <div class="main-body">
+        <nav-bar></nav-bar>
+        <div class="about-section">
+            <!-- <div class="divider-div kirby">
+                <img class="divider" src="/media/dividers/kirby.gif" alt="">
+            </div>  -->
+            <h3 class="intro-text">
+              -> This is where I will keep putting whatever thing I am currently doing, sometimes.
+            </h3>
+            
+            <div class="about-wrapper">
+                <div class="bar"></div>
+                <!-- <span class="about-title">
+                    <span class="caret-deco">&gt;</span> Media
+                </span> -->
+                <img src="/media/gifs/radio.gif" alt="">
+                <div class="bar"></div>
+            </div>
+
+            <p class="radio-description">This radio stands for "media".</p>
+
+            <div class="media-corner">
+                <!-- Music -->
+                <div class="music">
+                    <div class="media-title" className="bg-violet-500 p-4 mt-4 rounded-md">
+                        <img src="/media/gifs/cd.gif" alt="">
+                        <h3 class="media-type">Music</h3>
+                    </div>
+
+                    <h3 class="media-text">
+                        > The music I am currently listening to non-stop:
+                    </h3>
+
+                    <!-- Music Player -->
+                    <div class="player-wrapper">
+                        <music-player></music-player>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="divider-div">
+                <img class="divider" src="/media/dividers/kirby.gif" alt="">
+            </div>  -->
+
+            <!-- Books -->
+             <div class="media-corner">
+                <!-- Music -->
+                <div class="music">
+                    <div class="media-title" className="bg-violet-500 p-4 mt-4 rounded-md">
+                        <img src="/media/gifs/cd.gif" alt="">
+                        <h3 class="media-type">Books</h3>
+                    </div>
+
+                    <h3 class="media-text">
+                        > The books I am currently reading:
+                    </h3>
+
+                    <book-lib></book-lib>
+                    
+                </div>
+            </div>
+
+        </div>
+</body>
+</html>

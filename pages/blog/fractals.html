@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../pages.css">
+    <title>Sierpinski Fractals</title>
+</head>
+<body class="markdown">
+    <h1 class="markdown-main-title markdown-h1">Sierpinski Fractals</h1>
+    <p class="markdown-p">Yesterday, I enthusiastically reached the part of the &quot;Systematic Program Design&quot; course that covers generative recursion (a.k.a. fractals), and since I like some challenge, I tried to implement the <strong>Sierpinski</strong> Triangle and Carpet by myself, Before going through the course material—while still following the design recipe, of course.</p>
+    <p class="markdown-p">Here is the design recipe:</p>
+    <pre class="markdown-code"><code class="lang-scheme">(define (genrec-fn d)
+  (cond [(trivial? d) (trivial-answer d)]
+        [else
+         (... d 
+              (genrec-fn (next-problem d)))]))
+    </code></pre>
+    <p class="markdown-p">The function to implement the Sierpinski Triangle being:</p>
+    <pre class="markdown-code"><code class="lang-scheme">(require 2htdp/image)
+
+(define BASE 10)
+
+(define (sierpinski s)
+  (if (&gt;= BASE s)
+      (triangle BASE "outline" "red")
+      (overlay (triangle s "outline" "red")
+               (local [(define sub (sierpinski (/ s 2)))]
+                 (above sub
+                        (beside sub sub))))))
+    </code></pre>
+    <p class="markdown-p">And the result was, just, S-T-U-N-N-I-N-G:</p>
+    <div align="center">
+      <img class="markdown-image" src="/media/blogs/fractals/1.png" alt="triangle">
+    </div>
+    <p class="markdown-p">Step 1 done. It was easy. But when I tried to implement the Sierpinski carpet, I generated a lot of patterns before reaching the final result.</p>
+    <p class="markdown-p">I don&#39;t call them failed attempts since they generates very beautiful Arabesques. Here are some examples:</p>
+    <p class="markdown-p">A giant stack of Roman Columns:</p>
+    <pre class="markdown-code"><code class="lang-scheme">(define (carpet s)
+  (if (&gt;= BASE s)
+      (square BASE "outline" "red")
+      (overlay (square s "outline" "red")
+               (local [(define sub (carpet (/ s 2)))]
+                 (above (beside sub sub sub)
+                        (beside sub (square (/ s 2) "outline" "red") sub)
+                        (beside sub sub sub))))))
+    </code></pre>
+    <div align="center">
+      <img class="markdown-image" src="/media/blogs/fractals/2.png" alt="triangle">
+    </div>
+    <p class="markdown-p">A vine:</p>
+    <pre class="markdown-code"><code class="lang-scheme">(define (vine s)
+  (if (&gt;= BASE s)
+      (square BASE "outline" "green")
+      (overlay (square s "outline" "green")
+               (local [(define sub (vine (/ s 2)))]
+                 (above (beside sub sub sub)
+                        (beside sub sub)
+                        (beside sub sub))))))
+    </code></pre>
+    <div align="center">
+      <img class="markdown-image" src="/media/blogs/fractals/3.png" alt="triangle">
+    </div>
+    <p class="markdown-p">A Chip (XD):</p>
+    <pre class="markdown-code"><code class="lang-scheme">(define (chip s)
+  (if (&gt;= BASE s)
+      (square BASE "outline" "darkgreen")
+      (overlay (square s "outline" "darkgreen")
+               (local [(define sub (chip (/ s 2)))]
+                 (above (beside sub sub)
+                        (beside sub sub))))))
+    </code></pre>
+    <div align="center">
+      <img class="markdown-image" src="/media/blogs/fractals/4.png" alt="triangle">
+    </div>
+    <p class="markdown-p">And finally, after finding out what has been generating these abominations and not a clean Sierpinski Carpet, I got this result:</p>
+    <pre class="markdown-code"><code class="lang-scheme">(define (sierpinski-carpet s)
+  (if (&gt;= BASE s)
+      (square s "solid" "red")
+      (overlay (square s "outline" "red")
+               (local [(define sub (sierpinski-carpet (/ s 3)))
+                       (define blk (square (/ s 3) "solid" "white"))]
+                 (above (beside sub sub sub)
+                        (beside sub blk sub)
+                        (beside sub sub sub))))))
+    </code></pre>
+    <p class="markdown-p">And TAA-DAAAA:</p>
+    <div align="center">
+      <img class="markdown-image" src="/media/blogs/fractals/5.png" alt="square">
+    </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../pages.css">
+    <title>Electrical Trash Bin</title>
+</head>
+<body class="markdown">
+    <h1 class="markdown-main-title markdown-h1">Electrical Trash Bin</h1>
+    <p class="markdown-p">It all started when I typed &quot;Arduino&quot; in YouTube search to look for ideas and get inspired.</p>
+    <p class="markdown-p">While scrolling the suggestions, I stumbled upon a thumbnail featuring an electrical dustbin made with cardboard, that reminded me of a small plastic trash bin I bought ages ago that&#39;s laying on one of my wardrobe shelves, storing some useless things that I barely use.</p>
+    <p class="markdown-p">The challenge was to try to make one without watching the video.</p>
+    <p class="markdown-p">The tools I&#39;d be using are:</p>
+    <ul>
+        <li class="markdown-p">Arduino board of course;</li>
+        <li class="markdown-p">A sensor (Ultrasonic Sensor HC-SR04);</li>
+        <li class="markdown-p">A servo motor;</li>
+        <li class="markdown-p">A stick;</li>
+        <li class="markdown-p">The plastic bin.</li>
+    </ul>
+    <p class="markdown-p">Easy-Peasy.</p>
+    <h1 class="markdown-title markdown-h1" id="step-1-learn-about-the-sensor">Step 1: Learn about the sensor</h1>
+    <p class="markdown-p">Resources I used for this purpose:</p>
+    <ul>
+    <li class="markdown-p"><a href="https://randomnerdtutorials.com/complete-guide-for-ultrasonic-sensor-hc-sr04/">Complete Guide for Ultrasonic Sensor HC-SR04 with Arduino</a>;</li>
+    <li class="markdown-p"><a href="https://www.youtube.com/watch?v=M-UKXCUI0rE">Understanding and Connecting the HC-SR04 Sensor - Paul McWhorter</a> (I highly recommend this YouTube channel, especially the Arduino playlist for everyone starting to learn Arduino, it helped me a lot!)</li>
+    </ul>
+    <p class="markdown-p">The <span style="color:CadetBlue">HC-SR04</span> is a sensor that uses sonar to determine the distance to an object.</p>
+    <p class="markdown-p">It has 4 pins:</p>
+    <ul>
+    <li class="markdown-p"><u>VCC</u>: powers the sensor (5V);</li>
+    <li class="markdown-p"><u>Trig</u>: trigger input pin;</li>
+    <li class="markdown-p"><u>Echo</u>: echo output pin;</li>
+    <li class="markdown-p"><u>GND</u>: ground.</li>
+    </ul>
+    <p class="markdown-p">This is how it works:</p>
+    <ul>
+    <li class="markdown-p">The ultrasound transmitter -the trig pin- emits a high-frequency sound (40 kHz).</li>
+    <li class="markdown-p">The sound travels through the air, finds an object, and bounce back to the module.</li>
+    <li class="markdown-p">The ultrasound -the echo pin- receives the echo (the reflected sound).</li>
+    </ul>
+    <p class="markdown-p">To compute the distance: d = (speed of sound x time) / 2.</p>
+    <p class="markdown-p">The speed of sound in the air at 20ºC (68ºF) is 343m/s.</p>
+    <p class="markdown-p">Some relevant specs:</p>
+    <ul>
+    <li class="markdown-p"><u>Range</u>: 2 cm - 400 cm;</li>
+    <li class="markdown-p"><u>Accuracy</u>: 0.3 cm;</li>
+    <li class="markdown-p"><u>Measuring Angle</u>: 30 degree;</li>
+    <li class="markdown-p"><u>Power Supply</u>: +5 V DC;</li>
+    </ul>
+    <p class="markdown-p">Image of the front:<br>
+    <img class="markdown-image" src="/media/blogs/servobin/sensor-front.jpg" alt="Front Image of the Sensor"></p>
+    <p class="markdown-p">The back:<br>
+    <img class="markdown-image" src="/media/blogs/servobin/sensor-back.jpg" alt="Back Image of the Sensor">
+    <br>Such a beauty, right?</p>
+    <h1 class="markdown-title markdown-h1" id="step-2-the-actual-code">Step 2: The actual code</h1>
+    <p class="markdown-p">I will open the Arduino IDE and start by assigning the pins:</p>
+    <pre class="markdown-code"><code class="lang-C"><span class="hljs-regexp">//</span> The senso<span class="hljs-string">r's pins
+    int trigPin = 12;
+    int echoPin = 11;
+
+    // The servo'</span>s pins
+    int servoPin = <span class="hljs-number">9</span>;
+    </code></pre>
+    <p class="markdown-p">And then, defining some variables:</p>
+    <pre class="markdown-code"><code class="lang-C"><span class="hljs-comment">// Servo position</span>
+    <span class="hljs-keyword">int</span> servoPos;
+
+    <span class="hljs-comment">// Sensor related data</span>
+    <span class="hljs-keyword">long</span> duration, cm;
+    </code></pre>
+    <ul>
+    <li class="markdown-p"><code>duration</code> is the time between the emission and the reception of the signal.</li>
+    <li class="markdown-p"><code>cm</code> is the computed distance in centimeter.</li>
+    </ul>
+    <p class="markdown-p">And initiating a new Servo instance:</p>
+    <pre class="markdown-code"><code class="lang-C">// Initiate a Servo<span class="hljs-built_in"> instance
+    </span>Servo servo;
+    </code></pre>
+    <p class="markdown-p">(Spoiler alert) Here is the servo motor I will be using:
+    <img class="markdown-image" src="/media/blogs/servobin/servo.jpg" alt="Servo Motor"></p>
+    <p class="markdown-p">Now, the <code>setup()</code>:</p>
+    <pre class="markdown-code"><code class="lang-c"><span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">begin</span>(<span class="hljs-number">9600</span>);
+
+    <span class="hljs-comment">// Associating the Servo instance to the servo signal pin.</span>
+    servo.<span class="hljs-built_in">attach</span>(servoPin);
+
+    <span class="hljs-comment">// Defining inputs and outputs</span>
+    <span class="hljs-built_in">pinMode</span>(trigPin, <span class="hljs-literal">OUTPUT</span>);
+    <span class="hljs-built_in">pinMode</span>(echoPin, <span class="hljs-literal">INPUT</span>);
+    </code></pre>
+    <p class="markdown-p">In the <code>loop()</code>, I will initialize the servo position:</p>
+    <pre class="markdown-code"><code class="lang-c"><span class="hljs-attribute">servoPos</span> = <span class="hljs-number">180</span><span class="hljs-comment">;</span>
+    </code></pre>
+    <p class="markdown-p">And then:</p>
+    <pre class="markdown-code"><code class="lang-c"><span class="hljs-built_in">digitalWrite</span>(trigPin, <span class="hljs-literal">LOW</span>);
+    <span class="hljs-built_in">delayMicroseconds</span>(<span class="hljs-number">10</span>);
+    <span class="hljs-built_in">digitalWrite</span>(trigPin, <span class="hljs-literal">HIGH</span>); <span class="hljs-comment">// Stays high until ping makes it back.</span>
+    <span class="hljs-built_in">delayMicroseconds</span>(<span class="hljs-number">10</span>);
+    <span class="hljs-built_in">digitalWrite</span>(trigPin, <span class="hljs-literal">LOW</span>);
+    </code></pre>
+    <ul>
+    <li class="markdown-p">A <code class="markdown-inline-code">LOW</code> pulse is sent to ensure a clear <code>HIGH</code> pulse later;</li>
+    <li class="markdown-p">A <code class="markdown-inline-code">HIGH</code> pulse is sent for 10 microseconds;</li>
+    </ul>
+    <p class="markdown-p"><code>pulseIn()</code> is used to get the sound wave travel time in microseconds:</p>
+    <pre class="markdown-code"><code class="lang-c">duration = <span class="hljs-built_in">pulseIn</span>(echoPin, <span class="hljs-literal">HIGH</span>);
+    </code></pre>
+    <blockquote>
+    <p class="markdown-p">→ Pulse length = time to travel to the objects + time on the way back.</p>
+    </blockquote>
+    <p class="markdown-p">And then we calculate the distance to an object in centimeters:</p>
+    <pre class="markdown-code"><code class="lang-c"><span class="hljs-attribute">cm</span> = (duration / <span class="hljs-number">2</span>) / <span class="hljs-number">29.1</span><span class="hljs-comment">;</span>
+    </code></pre>
+    <ul>
+    <li class="markdown-p">The formula used being <code>distance = ( traveltime / 2 ) x speed of sound</code>;</li>
+    <li class="markdown-p">The speed of sound is: 343 m/s = 0.0343 cm/mu S = 1 / 29.1 cm/mu S.</li>
+    </ul>
+    <p class="markdown-p">Now, we check if the full distance is less than a desired distance to rotate the servo. I will opt for 10cm:</p>
+    <pre class="markdown-code"><code class="lang-c"><span class="hljs-keyword">if</span> <span class="hljs-comment">(cm &lt; 10)</span> {
+    servoPos = <span class="hljs-number">70</span>;
+    }
+
+    servo.write<span class="hljs-comment">(servoPos)</span>;
+    </code></pre>
+    <p class="markdown-p">And then resetting the servo angle to its initial position:</p>
+    <pre class="markdown-code"><code class="lang-c"><span class="hljs-attribute">servoPos</span> = <span class="hljs-number">180</span><span class="hljs-comment">;</span>
+    </code></pre>
+    <p class="markdown-p">AND TADAAAAA!<br>
+    <img class="markdown-image" src="/media/blogs/servobin/final-result.jpg" alt="Final Result"></p>
+    <p class="markdown-p">A video demo:</p>
+    <video controls>
+        <source src="/media/blogs/servobin/video-result.mp4" type="video/mp4">
+    </video>
+    <p class="markdown-p">The end ...</p>
+</body>
+</html>

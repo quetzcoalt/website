@@ -1,0 +1,289 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../pages.css">
+    <title>Perlin Noise - Terrain Generation Algorithm</title>
+</head>
+<body class="markdown">
+    <h1 class="markdown-main-title markdown-h1">Perlin Noise - Terrain Generation Algorithm</h1>
+    <p class="markdown-p">It's a type of gradient noise developed by Ken Perlin in 1983 as a result of his frustration with the "machine-like" look of CGI at the time.</p>
+    <p class="markdown-p">It's mainly used for procedural generation of terrains in video games.</p>
+    <h4 class="markdown-h1">How Perlin Noise Works?</h4>
+    <p class="markdown-p markdown-numeration"><span class="markdown-number">1-</span> Define a grid<br>
+    <img class="markdown-image" src="https://panolam.com/wp-content/uploads/2022/09/GRID-OVERLAY-04-600x601.jpg" alt="Grid"></p>
+    
+    <p class="markdown-p markdown-numeration"><span class="markdown-number">2-</span> At every corner of the grid, assign a unit vector (a vector of length 1) → These gradients influence the output noise values<br></p>
+    <img class="markdown-image" src="/media/blog/perlin_noise/vectors.png" alt="vectors">
+    <p class="markdown-p markdown-numeration"><span class="markdown-number">3-</span> Calculate the noise for a point:<br>
+    Given an input point (x, y), Perlin Noise returns an output ranging from 0 to 1. For example:</p>
+    <pre class="markdown-code"><code class="language-ts">function noise(x: number, y:number): number {}
+    </code></pre>
+    <p class="markdown-p markdown-numeration"><span class="markdown-number">4-</span> Identify which grid square the input point lies within. The corners of the square are integers, while the input point's coordinates are floats.</p>
+    <img class="markdown-image" src="/media/blog/perlin_noise/floats_ints.png" alt="floats and ints">
+    <p class="markdown-p">So we start by getting the values of the corners of the square we are in:</p>
+    <pre class="markdown-code"><code class="language-ts">// The left top and bottom corners
+    const x_l = Math.floor(x) &amp; 255;
+    const y_t = Math.floor(y) &amp; 255;
+
+    // The right top and bottom corners
+    const x_r = (Math.floor(x) + 1) &amp; 255;
+    const y_b = (Math.floor(y) + 1) &amp; 255;
+    </code></pre>
+    <p class="markdown-p">We then get the fractional grid coordinates:</p>
+    <pre class="markdown-code"><code class="language-ts">// Fractional x relative to the left side
+    const xf_l = x - x_l;
+
+    // Fractional y relative to the top side
+    const yf_t = y - y_t;
+
+    // Fractional x relative to the right side
+    const xf_r = x - x_r;
+
+    // Fractional y relative to the bottom side
+    const yf_b = y - y_b;
+    </code></pre>
+    <p class="markdown-p markdown-numeration">5<span class="markdown-number">5-</span> Compute the dot product between the the hash of the corner's gradient vector and the vector pointing from the corner to the input point.</p>
+    <p class="markdown-p"><img class="markdown-image" src="/media/blog/perlin_noise/dot_product.png" alt="dot product"></p>
+    <p class="markdown-p">The dot product is defined mathematically:<br><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>A</mi><mo>⃗</mo></mover><mi mathvariant="normal">.</mi><mover accent="true"><mi>B</mi><mo>⃗</mo></mover><mo>=</mo><mi mathvariant="normal">∣</mi><mi>A</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>B</mi><mi mathvariant="normal">∣</mi><mtext>  </mtext><mi>c</mi><mi>o</mi><mi>s</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec{A}.\vec{B}=|A||B|\;cos(\theta)</annotation></semantics></math></span><span class="katex-html"><span class="base"><span class="strut" style="height:0.9663em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">A</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.0966em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+    3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+    10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+    -1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+    -7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+    H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+    c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span><span class="mord">.</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+    3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+    10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+    -1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+    -7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+    H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+    c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mord">∣∣</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">cos</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span></span></span></span><br>
+    <br>Or:<br><br><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>A</mi><mo>⃗</mo></mover><mi mathvariant="normal">.</mi><mover accent="true"><mi>B</mi><mo>⃗</mo></mover><mo>=</mo><msub><mi>A</mi><mi>x</mi></msub><msub><mi>B</mi><mi>x</mi></msub><mo>+</mo><msub><mi>A</mi><mi>y</mi></msub><msub><mi>B</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">\vec{A}.\vec{B}=A_xB_x+A_yB_y</annotation></semantics></math></span><span class="katex-html"><span class="base"><span class="strut" style="height:0.9663em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">A</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.0966em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+    3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+    10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+    -1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+    -7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+    H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+    c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span><span class="mord">.</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1522em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+    3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+    10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+    -1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+    -7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+    H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+    c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0502em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0502em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><br><br>
+    We use the hash of the gradients at each corner of the grid so they appear random to avoid visual artifacts. And true randomness can be computationally expensive and non-deterministic. That's why we use a <strong class="markdown-strong">deterministic pseudo-random approach</strong> by employing:</p>
+    <ul>
+    <li class="markdown-p">A <strong class="markdown-strong">fixed permutation table</strong> to define a pseudo-random sequence.</li>
+    <li class="markdown-p">A simple <strong class="markdown-strong">hashing</strong> function to select gradients from the table based on input coordinates.</li>
+    </ul>
+    <p class="markdown-p">We define the permutation table and hashes as follow:</p>
+    <pre class="markdown-code"><code class="language-ts">let permutation: number[];
+
+    for (let i = 0; i &lt; 256; i++) {
+        this.permutation[i] = i;
+    }
+
+    const p = [...permutation, ...permutation];
+    </code></pre>
+    <p class="markdown-p">We also duplicate the permutation table to handle edge cases when we access gradients.</p>
+    <p class="markdown-p">This array is later shuffled to ensure variation.</p>
+    <pre class="markdown-code"><code class="language-ts">function shuffle(permutation: number[]) {
+        for (let i = permutation.length - 1; i &gt; 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            permutation[i], permutation[j]] = [permutation[j], permutation[i]];
+        }
+    }
+    </code></pre>
+    <p class="markdown-p">For a grid cell containing the input point (x, y) we use the permutation table to compute hashes for each corner:</p>
+    <pre class="markdown-code"><code class="language-ts">const a = p[p[x_l] + y_t];
+    const b = p[p[x_l] + y_t];
+    const c = p[p[x_r] + y_b];
+    const d = p[p[x_r] + y_b];
+    </code></pre>
+    <ul>
+    <li class="markdown-p"><code class="markdown-inline-code">a</code>, <code class="markdown-inline-code">b</code>, <code class="markdown-inline-code">c</code>, and <code class="markdown-inline-code">d</code> are the hashes for corners A, B, C and D respectively.</li>
+    </ul>
+    <p class="markdown-p">Here we get the point from duplicating the permutation table. For example, in <code class="markdown-inline-code">p[p[x_l] + y_t];</code> the value of <code class="markdown-inline-code">p[x_l] + y_t</code> can exceed 255 and we get an error in a table of length 256.</p>
+    <p class="markdown-p"><img class="markdown-image" src="https://i.imgur.com/1YqbqgZ.png" alt="ABCD"></p>
+    <p class="markdown-p">This hashing ensures:</p>
+    <ul>
+    <li class="markdown-p">Each corner of the grid is mapped to a gradient in a way that appears random.</li>
+    <li class="markdown-p">The gradients vary smoothly and predictably as the input point moves.</li>
+    </ul>
+    <p class="markdown-p">Using random gradients for each corner would result in discontinuities when moving across grid boundaries.</p>
+    <p class="markdown-p"><em>In conclusion:</em></p>
+    <ul>
+    <li class="markdown-p"><strong class="markdown-strong">Permutation Table</strong>: Acts as a source of deterministic pseudo-randomness for gradients.</li>
+    <li class="markdown-p"><strong class="markdown-strong">Hashing</strong>: Maps input coordinates to gradients, ensuring smooth transitions and consistent outputs.</li>
+    <li class="markdown-p"><strong class="markdown-strong">Repeatability</strong>: By using the same permutation table, the same inputs always produce the same noise values, which is crucial for applications like terrain generation.</li>
+    </ul>
+    <p class="markdown-p">And then we write the function to compute the gradient vector. The <code class="markdown-inline-code">grad</code> function simulates the dot product between:</p>
+    <ol>
+    <li class="markdown-p">A <strong class="markdown-strong">gradient vector</strong> defined by the <code class="markdown-inline-code">hash</code>.</li>
+    <li class="markdown-p">A <strong class="markdown-strong">distance vector</strong> (x, y, z), representing the offset of the point from the grid corner.</li>
+    </ol>
+    <p class="markdown-p">There are two functions.</p>
+    <pre class="markdown-code"><code class="language-ts">function grad(hash: number, x: number, y: number, z: number) {
+        const h = hash &amp; 15;
+        
+        const u = h &lt; 8 /* 0b1000 */ ? x : y; 
+        
+        let v;
+        
+        // expanded it for readability.
+        
+        if (h &lt; 4 /* 0b0100 */)
+            v = y;
+        else if (h == 12 /* 0b1100 */ || h == 14 /* 0b1110*/)
+            v = x;
+        else v = z;
+        
+        return ((h &amp; 1) == 0 ? u : -u) + ((h &amp; 2) == 0 ? v : -v);
+    }
+    </code></pre>
+    <p class="markdown-p">A step by step breakdown:</p>
+    <ul>
+    <li class="markdown-p">Take the least significant 4 bits of the hash.</li>
+    </ul>
+    <pre class="markdown-code"><code class="language-ts">int h = hash &amp; 15; 
+    </code></pre>
+    <ul>
+    <li class="markdown-p">Choosing the first component <code class="markdown-inline-code">u</code>
+    <ul>
+    <li class="markdown-p">If the most significant bit of <code class="markdown-inline-code">h</code> is 0, choose <code class="markdown-inline-code">u = x</code>, otherwise <code class="markdown-inline-code">u = y</code>;</li>
+    </ul>
+    </li>
+    </ul>
+    <pre class="markdown-code"><code class="language-ts">const u = h &lt; 8 /* 0b1000 */ ? x : y; 
+    </code></pre>
+    <ul>
+    <li class="markdown-p">Choosing the second component <code class="markdown-inline-code">v</code>
+    <ul>
+    <li class="markdown-p">The selection of <code class="markdown-inline-code">v</code> depends on the <strong class="markdown-strong">first two bits</strong> of <code class="markdown-inline-code">h</code> (bits 1 and 2):
+    <ul>
+    <li class="markdown-p">If both bits are 0, <code class="markdown-inline-code">v = y</code>;</li>
+    <li class="markdown-p">If both bits are 1, <code class="markdown-inline-code">v = x</code>;</li>
+    <li class="markdown-p">otherwise, <code class="markdown-inline-code">v = z</code>;</li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    <pre class="markdown-code"><code class="language-ts">if (h &lt; 4) v = y; 
+    else if (h == 12 || h == 14) v = x; 
+    else v = z;
+    </code></pre>
+    <ul>
+    <li class="markdown-p">Setting signs for <code class="markdown-inline-code">u</code> and <code class="markdown-inline-code">v</code>
+    <ul>
+    <li class="markdown-p">The last two bits of <code class="markdown-inline-code">h</code> (bits 0 and 1) determine the signs:
+    <ul>
+    <li class="markdown-p">If bit 0 is 0, u is positive; otherwise, u is negative.</li>
+    <li class="markdown-p">If bit 1 is 0, v is positive; otherwise, v is negative.</li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    <pre class="markdown-code"><code class="language-ts">return ((h &amp; 1) == 0 ? u : -u) + ((h &amp; 2) == 0 ? v : -v);
+    </code></pre>
+    <ul>
+    <li class="markdown-p"><em>Example:</em><br>
+    Let</li>
+    <li class="markdown-p"><code class="markdown-inline-code">hash = 0b1101</code> (13 in decimal)</li>
+    <li class="markdown-p"><code class="markdown-inline-code">x = 0.5</code>, <code class="markdown-inline-code">y = 0.2</code>, <code class="markdown-inline-code">z = 0.8</code>.</li>
+    </ul>
+    <p class="markdown-p">Compute <code class="markdown-inline-code">h = hash &amp; 15</code>:</p>
+    <ul>
+    <li class="markdown-p">h = <code class="markdown-inline-code">0b1101</code></li>
+    </ul>
+    <p class="markdown-p">Select <code class="markdown-inline-code">u</code>:</p>
+    <ul>
+    <li class="markdown-p">h &lt; 8 is false
+    <ul>
+    <li class="markdown-p">So: <code class="markdown-inline-code">u = y = 0.2</code></li>
+    </ul>
+    </li>
+    </ul>
+    <p class="markdown-p">Select <code class="markdown-inline-code">v</code>:</p>
+    <ul>
+    <li class="markdown-p">h &lt; 8 is false</li>
+    <li class="markdown-p">h === 12 or h === 14 is false
+    <ul>
+    <li class="markdown-p">So: <code class="markdown-inline-code">v = z = 0.8</code>'</li>
+    </ul>
+    </li>
+    </ul>
+    <p class="markdown-p">Determine the signs:</p>
+    <ul>
+    <li class="markdown-p"><code class="markdown-inline-code">h &amp; 1 = 1</code>, then u is negative.
+    <ul>
+    <li class="markdown-p">So <code class="markdown-inline-code">u = -0.2</code></li>
+    </ul>
+    </li>
+    <li class="markdown-p"><code class="markdown-inline-code">h &amp; 2 = 0</code>, then v is positive.
+    <ul>
+    <li class="markdown-p">So <code class="markdown-inline-code">v = 0.8</code></li>
+    </ul>
+    </li>
+    </ul>
+    <p class="markdown-p">Compute and return:</p>
+    <ul>
+    <li class="markdown-p"><code class="markdown-inline-code">u + v = -0.2 + 0.8 = 0.6</code></li>
+    </ul>
+    <p class="markdown-p">The other one, which is more optimized is:</p>
+    <pre class="markdown-code"><code class="language-ts">grad(hash: number, x: number, y: number, z: number) {
+        switch (hash &amp; 0xf) { 
+            case 0x0:
+                return x + y;
+            case 0x1:
+                return -x + y;
+            case 0x2:
+                return x - y;
+            case 0x3:
+                return -x - y;
+            case 0x4:
+                return x + z;
+            case 0x5:
+                return -x + z;
+            case 0x6:
+                return x - z;
+            case 0x7:
+                return -x - z;
+            case 0x8:
+                return y + z;
+            case 0x9:
+                return -y + z;
+            case 0xa:
+                return y - z;
+            case 0xb:
+                return -y - z;
+            case 0xc:
+                return y + x;
+            case 0xd:
+                return -y + z;
+            case 0xe:
+                return y - x;
+            case 0xf:
+                return -y - z;
+            default:
+                return 0;
+            }
+    &nbsp; }
+    </code></pre>
+    <p class="markdown-p">This function is taken from <a href="http://riven8192.blogspot.com/2010/08/calculate-perlinnoise-twice-as-fast.html">here</a> since the original one is pretty confusing lol.</p>
+    <p class="markdown-p">The gradient vector is chosen based on the least significant 4 bits of the <code class="markdown-inline-code">hash</code> value:</p>
+    <pre class="markdown-code"><code class="language-ts">hash &amp; 0xf
+    </code></pre>
+    <p class="markdown-p">Those 4 bits specify the direction and the sign for the gradient.</p>
+    <div class="table-wrapper"><table><thead><tr><th><strong class="markdown-strong">Hash Value (hex)</strong></th><th><strong class="markdown-strong">Gradient Vector</strong></th><th><strong class="markdown-strong">Explanation</strong></th></tr></thead><tbody><tr><td><code class="markdown-inline-code">0x0</code> (<code class="markdown-inline-code">0000</code>)</td><td><code class="markdown-inline-code">(1, 1, 0)</code></td><td>Both <code class="markdown-inline-code">x</code> and <code class="markdown-inline-code">y</code> are positive; <code class="markdown-inline-code">z</code> is zero.</td></tr><tr><td><code class="markdown-inline-code">0x1</code> (<code class="markdown-inline-code">0001</code>)</td><td><code class="markdown-inline-code">(-1, 1, 0)</code></td><td><code class="markdown-inline-code">x</code> is negative, <code class="markdown-inline-code">y</code> is positive, <code class="markdown-inline-code">z</code> is zero.</td></tr><tr><td><code class="markdown-inline-code">0x2</code> (<code class="markdown-inline-code">0010</code>)</td><td><code class="markdown-inline-code">(1, -1, 0)</code></td><td><code class="markdown-inline-code">x</code> is positive, <code class="markdown-inline-code">y</code> is negative, <code class="markdown-inline-code">z</code> is zero.</td></tr><tr><td><code class="markdown-inline-code">0x3</code> (<code class="markdown-inline-code">0011</code>)</td><td><code class="markdown-inline-code">(-1, -1, 0)</code></td><td>Both <code class="markdown-inline-code">x</code> and <code class="markdown-inline-code">y</code> are negative, <code class="markdown-inline-code">z</code> is zero.</td></tr><tr><td><code class="markdown-inline-code">0x4</code> (<code class="markdown-inline-code">0100</code>)</td><td><code class="markdown-inline-code">(1, 0, 1)</code></td><td><code class="markdown-inline-code">x</code> is positive, <code class="markdown-inline-code">z</code> is positive, <code class="markdown-inline-code">y</code> is zero.</td></tr><tr><td><code class="markdown-inline-code">0x5</code> (<code class="markdown-inline-code">0101</code>)</td><td><code class="markdown-inline-code">(-1, 0, 1)</code></td><td><code class="markdown-inline-code">x</code> is negative, <code class="markdown-inline-code">z</code> is positive, <code class="markdown-inline-code">y</code> is zero.</td></tr><tr><td><code class="markdown-inline-code">0x6</code> (<code class="markdown-inline-code">0110</code>)</td><td><code class="markdown-inline-code">(1, 0, -1)</code></td><td><code class="markdown-inline-code">x</code> is positive, <code class="markdown-inline-code">z</code> is negative, <code class="markdown-inline-code">y</code> is zero.</td></tr><tr><td><code class="markdown-inline-code">0x7</code> (<code class="markdown-inline-code">0111</code>)</td><td><code class="markdown-inline-code">(-1, 0, -1)</code></td><td><code class="markdown-inline-code">x</code> is negative, <code class="markdown-inline-code">z</code> is negative, <code class="markdown-inline-code">y</code> is zero.</td></tr><tr><td><code class="markdown-inline-code">0x8</code> (<code class="markdown-inline-code">1000</code>)</td><td><code class="markdown-inline-code">(0, 1, 1)</code></td><td><code class="markdown-inline-code">y</code> is positive, <code class="markdown-inline-code">z</code> is positive, <code class="markdown-inline-code">x</code> is zero.</td></tr><tr><td><code class="markdown-inline-code">0x9</code> (<code class="markdown-inline-code">1001</code>)</td><td><code class="markdown-inline-code">(0, -1, 1)</code></td><td><code class="markdown-inline-code">y</code> is negative, <code class="markdown-inline-code">z</code> is positive, <code class="markdown-inline-code">x</code> is zero.</td></tr><tr><td><code class="markdown-inline-code">0xA</code> (<code class="markdown-inline-code">1010</code>)</td><td><code class="markdown-inline-code">(0, 1, -1)</code></td><td><code class="markdown-inline-code">y</code> is positive, <code class="markdown-inline-code">z</code> is negative, <code class="markdown-inline-code">x</code> is zero.</td></tr><tr><td><code class="markdown-inline-code">0xB</code> (<code class="markdown-inline-code">1011</code>)</td><td><code class="markdown-inline-code">(0, -1, -1)</code></td><td><code class="markdown-inline-code">y</code> is negative, <code class="markdown-inline-code">z</code> is negative, <code class="markdown-inline-code">x</code> is zero.</td></tr><tr><td><code class="markdown-inline-code">0xC</code> (<code class="markdown-inline-code">1100</code>)</td><td><code class="markdown-inline-code">(1, 0, 0)</code></td><td><code class="markdown-inline-code">x</code> is positive, <code class="markdown-inline-code">y</code> and <code class="markdown-inline-code">z</code> are zero.</td></tr><tr><td><code class="markdown-inline-code">0xD</code> (<code class="markdown-inline-code">1101</code>)</td><td><code class="markdown-inline-code">(-1, 0, 0)</code></td><td><code class="markdown-inline-code">x</code> is negative, <code class="markdown-inline-code">y</code> and <code class="markdown-inline-code">z</code> are zero.</td></tr><tr><td><code class="markdown-inline-code">0xE</code> (<code class="markdown-inline-code">1110</code>)</td><td><code class="markdown-inline-code">(0, 1, 0)</code></td><td><code class="markdown-inline-code">y</code> is positive, <code class="markdown-inline-code">x</code> and <code class="markdown-inline-code">z</code> are zero.</td></tr><tr><td><code class="markdown-inline-code">0xF</code> (<code class="markdown-inline-code">1111</code>)</td><td><code class="markdown-inline-code">(0, -1, 0)</code></td><td><code class="markdown-inline-code">y</code> is negative, <code class="markdown-inline-code">x</code> and <code class="markdown-inline-code">z</code> are zero.</td></tr></tbody></table></div>
+    <ul>
+    <li class="markdown-p">This results in 16 possible cases (0x0 to 0xf).</li>
+    <li class="markdown-p">Each case corresponds to
+    <ul>
+    <li class="markdown-p">a simple gradient vector like (1, 0, 0) or (-1, 0, 0).</li>
+    <li class="markdown-p">or combinations like (1, 1, 0).</li>
+    </ul>
+    </li>
+    </ul>
+</body>

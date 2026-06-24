@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages/pages.css">
+    <script defer src="components/NavBar.js"></script>
+    <script defer src="components/Buttons.js"></script>
+    <script src="utilities/routes.js"></script>
+    <title>whoami;</title>
+</head>
+<body>
+    <div class="main-body">
+        <nav-bar></nav-bar>
+        <section class="about-section">
+            <!-- Header Section -->
+            <header>
+                <h1 class="typewriter">
+                    Random person,
+                </h1>
+            </header>
+
+            <main class="about-main">
+                <div class="about-wrapper">
+                    <div class="bar"></div>
+                    <span class="about-title">
+                        <span class="caret-deco">&gt;</span> About Me
+                    </span>
+                    <img src="/media/icons/bird.gif" alt="">
+                    <div class="bar"></div>
+                </div>
+
+                <div class="about-grid">
+                    <!-- Left Column -->
+                    <div class="left-column">
+                        <!-- Bio -->
+                        <div class="about-card">
+                            <div class="about-header">
+                                <span class="subgrid-title">
+                                    <img src="media/gifs/bio.png" alt="bio" />
+                                    <span class="bio-title">bio.txt</span>
+                                </span>
+                                <win-btn></win-btn>
+                            </div>
+                            <div class="bio-text">
+                                <p>- I am Imane. And this is my pet:</p>
+                                <img class="animate-crab crab" src="media/pet.png" alt="crab" />
+                            </div>
+                        </div>
+
+                        <!-- Hobbies -->
+                        <div class="about-card">
+                            <div class="about-header">
+                                <span class="subgrid-title">
+                                    <img src="media/gifs/hobbies.png" alt="hobbies" />
+                                    <span>hobbies.txt</span>
+                                </span>
+                                <win-btn></win-btn>
+                            </div>
+                            <div class="about-list-wrapper" className="p-4 text-base">
+                                <ul class="about-list">
+                                    <li class="hobby"><span><img src="/media/gifs/bullet.gif" alt=""></span> Gaming sometimes.</li>
+                                    <li class="hobby"><span><img src="/media/gifs/bullet.gif" alt=""></span> Learning About Some Random Topic.</li>
+                                    <li class="hobby"><span><img src="/media/gifs/bullet.gif" alt=""></span> Reading.</li>
+                                    <li class="hobby"><span><img src="/media/gifs/bullet.gif" alt=""></span> Drawing.</li>
+                                    <li class="hobby"><span><img src="/media/gifs/bullet.gif" alt=""></span> Scavenging Electronic from devices and not doing anything with them.</li>
+                                </ul>
+                            </div>
+                            </div>
+                        </div>
+
+                <!-- Middle -->
+                <div class="middle-column" className="lg:col-span-6 space-y-4">
+                    <!-- Lily's Pictures -->
+                    <div class="about-card">
+                        <div class="about-header">
+                            <span class="subgrid-title">
+                                <img src="media/gifs/lily.png" alt="lily" />
+                                <span>lily.jpg</span>
+                                </span>
+                            <win-btn></win-btn>
+                        </div>
+                        <div class="win-wrapper">
+                            <p class="lily-text">Here are some pictures of my best friend Lily:</p>
+                            <div class="lily-pictures">
+                                <img
+                                    src="media/lily/1.jpg"
+                                    alt="Lily 1"
+                                    class="lily-picture lily-picture-one"
+                                />
+                                <img
+                                    src="media/lily/2.jpg"
+                                    alt="Lily 2"
+                                    class="lily-picture lily-picture-two"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Facts -->
+                    <div class="about-card">
+                        <div class="about-header">
+                            <span class="subgrid-title">
+                                <img src="media/gifs/facts.png" alt="facts" />
+                                <span>facts.jpg</span>
+                            </span>
+                            <win-btn></win-btn>
+                        </div>
+                        <div class="win-wrapper">
+                            <p>Fun facts about me:</p><br>
+                            <ul>
+                                <li class="enum-list"><span><img src="/media/gifs/bullet.gif" alt=""></span> <span style="color:thistle">19</span> is a special number to me.</li>
+                                <li class="enum-list"><span><img src="/media/gifs/bullet.gif" alt=""></span> My favorite number is 11, for some very unknown reason.</li>
+                                <li class="enum-list"><span><img src="/media/gifs/bullet.gif" alt=""></span> My favorite dinosaur `at the moment` is the Therizinosaurus.</li>
+                                <li class="enum-list"><span><img src="/media/gifs/bullet.gif" alt=""></span>> My major has nothing to do with Computer Science.</li>
+                                <li class="enum-list"><span><img src="/media/gifs/bullet.gif" alt=""></span> I collect toys, shells, rocks...</li>
+                                <li class="enum-list"><span><img src="/media/gifs/bullet.gif" alt=""></span> Jack of all trades, master of none.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="right-column">
+                    <!-- Interests -->
+                    <div class="about-card">
+                        <div class="about-header">
+                            <span class="subgrid-title">
+                                <img src="media/gifs/interests.png" alt="interests" />
+                                <span className="text-xs font-mono">interests.txt</span>
+                            </span>
+                            <win-btn></win-btn>
+                        </div>
+                        <div class="win-wrapper">
+                            <p>
+                            I am interested in many things <span class="caret-deco"><
+                            I wish I had more than 24 hours a day ></span>.
+                            Current interests include: <br/><br/>
+                                <p class="enum-list"><span><img src="/media/gifs/bullet.gif" alt=""></span> Theory of Computation;</p>
+                                <p class="enum-list"><span><img src="/media/gifs/bullet.gif" alt=""></span> Electronics;</p>
+                                <p class="enum-list"><span><img src="/media/gifs/bullet.gif" alt=""></span> Low Level Stuff;</p>
+                                <p class="enum-list"><span><img src="/media/gifs/bullet.gif" alt=""></span> Dinosaurs;</p>
+                                <p class="enum-list"><span><img src="/media/gifs/bullet.gif" alt=""></span> Rust;</p>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Interests -->
+                    <div class="about-card">
+                        <div class="about-header">
+                            <span class="subgrid-title">
+                                <img src="media/icons/no.gif" alt="no" />
+                                <span className="text-xs font-mono">error.exe</span>
+                            </span>
+                            <win-btn></win-btn>
+                        </div>
+                        <div class="win-wrapper determination">
+                            <img src="/media/gifs/determination.gif" alt="">
+                            <p>Always filled with determination.</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </main>
+        </section>
+    </div>
+</body>
+</html>
