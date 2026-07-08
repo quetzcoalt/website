@@ -1,3 +1,33 @@
+/* =========================
+    VARIABLES
+========================= */
+
+:root {
+    --violet-100: #ede9fe;
+    --violet-200: #ccbcf7;
+    --violet-300: #bca7f4;
+    --violet-400: #a783f2;
+    --violet-500: #915eef;
+    --violet-600: #7c3aed;
+    --violet-700: #6e34d3;
+    --violet-800: #602db8;
+
+    --zinc-500: #71717a;
+    --zinc-700: #464649;
+    --zinc-800: #27272a;
+    --zinc-900: #1c1c1c;
+
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9CA3AF;
+    --gray-500: #6B7280;
+    --gray-600: #4B5563;
+    --gray-700: #374151;
+    --gray-800: #3a424d;
+
+    --neutral-900: #11181a;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -211,7 +241,7 @@
 }
 
 .sitemap-header {
-  background-color: #7c3aed;
+  background-color: #f578cf;
   color: #fff;
   padding: 0.5rem 0.75rem;
   display: flex;
@@ -236,7 +266,7 @@
 }
 
 .sitemap-filename {
-    font-size: 0.75rem;
+    font-size: 1.5rem;
     font-family: monospace;
 }
 

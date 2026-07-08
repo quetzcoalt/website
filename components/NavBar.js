@@ -49,10 +49,6 @@ class NavBar extends HTMLElement {
                 </li>
                 <li>
                     <img class="folder-img" src='/media/icons/folder.gif' />
-                    <a class="nav-element" href="wikipedia.com">/my_notes;</a>
-                </li>
-                <li>
-                    <img class="folder-img" src='/media/icons/folder.gif' />
                     <a class="nav-element" href="/pages/gallery.html">/gallery;</a>
                 </li>
             </ul>

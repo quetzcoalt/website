@@ -165,7 +165,7 @@
 
 .subgrid-title {
     font-family: monospace;
-    font-size: 13px;
+    font-size: 1.5rem;
     line-height: 1rem; 
 }
 
@@ -199,6 +199,15 @@
 
 .hobby {
     font-size: 15px;
+}
+
+.song-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    border: 2px #f578cf 2px;
+    margin-bottom: 10px;
 }
 
 /* MIDDLE COLUMN */
@@ -268,12 +277,17 @@
 }
 
 .about-header {
-  background-color: var(--violet-600);
+  background-color: #cf61ae;
   color: white;
   padding: 0.5rem 0.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: all 300ms;
+}
+
+.about-header:hover {
+    background-color: rgb(78, 78, 31);
 }
 
 .determination {
