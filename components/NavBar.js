@@ -7,19 +7,19 @@ class NavBar extends HTMLElement {
 <nav class="navigation">
     <!-- Logo -->
     <div class="nav-logo">
-        <a class="logo-link" href="/main.html">
-            <img class="sun-image" src='/media/sun.png' />
+        <a class="logo-link" href="/index.html">
+            <img class="sun-image" src='media/sun.png' />
         </a>
     </div>
 
     <!-- Image (desktop only) -->
-    <img class="nav-image" src="/media/ascii.png" alt="galaxy" />
+    <img class="nav-image" src="media/ascii.png" alt="galaxy" />
 
     <!-- Desktop Navigation -->
     <div class="sitemap-card">
         <div class="sitemap-header">
             <span class="sitemap-title">
-                <img src="/media/gifs/hobbies.png" alt="hobbies" />
+                <img src="media/gifs/hobbies.png" alt="hobbies" />
                 <span class="sitemap-filename">sitemap.txt</span>
             </span>
             <div class="win-btn" className="flex space-x-2 mr-3">
@@ -32,30 +32,30 @@ class NavBar extends HTMLElement {
         <div class="nav-list">
             <ul class="desktop-nav-list">
                 <li>
-                    <img class="folder-img" src='/media/icons/folder.gif' />
-                    <a class="nav-element" href="/main.html">/about_me;</a>
+                    <img class="folder-img" src='media/icons/folder.gif' />
+                    <a class="nav-element" href="/index.html">/about_me;</a>
                 </li>
                 <li>
-                    <img class="folder-img" src='/media/icons/folder.gif' />
+                    <img class="folder-img" src='media/icons/folder.gif' />
                     <a class="nav-element" href="/pages/codebase.html">/codebase;</a>
                 </li>
                 <li>
-                    <img class="folder-img" src='/media/icons/folder.gif' />
+                    <img class="folder-img" src='media/icons/folder.gif' />
                     <a class="nav-element" href="/pages/blog.html">/blog;</a>
                 </li>
                 <li>
-                    <img class="folder-img" src='/media/icons/folder.gif' />
+                    <img class="folder-img" src='media/icons/folder.gif' />
                     <a class="nav-element" href="/pages/now.html">/now;</a>
                 </li>
                 <li>
-                    <img class="folder-img" src='/media/icons/folder.gif' />
+                    <img class="folder-img" src='media/icons/folder.gif' />
                     <a class="nav-element" href="/pages/gallery.html">/gallery;</a>
                 </li>
             </ul>
         </div>
     </div>
 
-    <img class="cat-img" src='/media/characters/laptop-cat.gif' />
+    <img class="cat-img" src='media/characters/laptop-cat.gif' />
 
     <!-- Mobile Menu -->
     <div class="mobile-menu">
@@ -77,7 +77,7 @@ class NavBar extends HTMLElement {
             </div>
 
             <ul class="nav-list-small">
-                <li><a class="nav-element-small" href="main.html">about_me;</a></li>
+                <li><a class="nav-element-small" href="index.html">about_me;</a></li>
                 <li><a class="nav-element-small" href="pages/codebase.html">codebase;</a></li>
                 <li><a class="nav-element-small" href="pages/blog.html">blog;</a></li>
                 <li><a class="nav-element-small" href="pages/now.html">now;</a></li>

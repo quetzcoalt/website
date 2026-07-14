@@ -5,13 +5,13 @@ class MusicPlayer extends HTMLElement {
     this.audio = new Audio();
     this.currentIndex = 0;
     this.songs = [
-      { id: 0, link: "/media/songs/X_vs_Zero_Decisive_Battle_2_Soundtrack.mp3", name: "X vs Zero Decisive Battle 2", artist: "Breis", image: "xvszero.jpg" },
-      { id: 1, link: "/media/songs/Igorrr_Tout_Petit_Moineau.mp3", name: "Tout Petit Moineau", artist: "Igorrr", image: "igorrr.jpg" },
-      { id: 2, link: "/media/songs/No_Leaf_Clover.mp3", name: "No Leaf Clover", artist: "Metallica", image: "metallica.jpg" },
-      { id: 3, link: "/media/songs/SABATON_The_Attack_of_the_Dead_Men.mp3", name: "The Attack of the Dead Men", artist: "Sabaton", image: "sabaton.jpg" },
-      { id: 4, link: "/media/songs/Spear_of_Justice.mp3", name: "Spear of Justice", artist: "Toby Fox", image: "undertale.jpg" },
-      { id: 5, link: "/media/songs/And_Then_There_Was_Silence.mp3", name: "And Then There Was Silence", artist: "Blind Guardian", image: "blind_guardian.jpg" },
-      { id: 6, link: "/media/songs/Megaman_X_5.mp3", name: "Megaman X5 Intro", artist: "Unknown", image: "megaman_x5.jpg" },
+      { id: 0, link: "media/songs/X_vs_Zero_Decisive_Battle_2_Soundtrack.mp3", name: "X vs Zero Decisive Battle 2", artist: "Breis", image: "xvszero.jpg" },
+      { id: 1, link: "media/songs/Igorrr_Tout_Petit_Moineau.mp3", name: "Tout Petit Moineau", artist: "Igorrr", image: "igorrr.jpg" },
+      { id: 2, link: "media/songs/No_Leaf_Clover.mp3", name: "No Leaf Clover", artist: "Metallica", image: "metallica.jpg" },
+      { id: 3, link: "media/songs/SABATON_The_Attack_of_the_Dead_Men.mp3", name: "The Attack of the Dead Men", artist: "Sabaton", image: "sabaton.jpg" },
+      { id: 4, link: "media/songs/Spear_of_Justice.mp3", name: "Spear of Justice", artist: "Toby Fox", image: "undertale.jpg" },
+      { id: 5, link: "media/songs/And_Then_There_Was_Silence.mp3", name: "And Then There Was Silence", artist: "Blind Guardian", image: "blind_guardian.jpg" },
+      { id: 6, link: "media/songs/Megaman_X_5.mp3", name: "Megaman X5 Intro", artist: "Unknown", image: "megaman_x5.jpg" },
     ];
 
     this.render();
@@ -67,7 +67,7 @@ class MusicPlayer extends HTMLElement {
           ${this.songs.map((song) => `
             <div class="song" data-id="${song.id}">
               <div class="image-section">
-                <img src="/media/albums/${song.image}" alt="${song.name}" width="80">
+                <img src="media/albums/${song.image}" alt="${song.name}" width="80">
                 <button data-id="${song.id}" class="album-picture">
                   <i class="fa-solid fa-play"></i>
                 </button>

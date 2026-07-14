@@ -203,7 +203,7 @@ class CodeCard extends HTMLElement {
           </ul>
 
           ${
-            id == "trackatui" ? `<img style = "margin-top: 20px" src="/media/projects/${id}.png" />` : ""}
+            id == "trackatui" ? `<img style = "margin-top: 20px" src="media/projects/${id}.png" />` : ""}
 
           <div class="technologies">
             ${technologies.map(t => `<span class="technology">${t}</span>`).join(" ")}

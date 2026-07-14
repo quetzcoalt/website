@@ -12,7 +12,7 @@ class Books extends HTMLElement {
             ${this.books.map((book) => `
                 <div data-id=${book.id} class="book">
                     <p class="book-title">${book.title}</p>
-                    <img class="book-cover" src="/media/books/${book.cover}" >
+                    <img class="book-cover" src="media/books/${book.cover}" >
                     <p class="book-author">- ${book.author} -</p>
                 </div>
             `).join('')}

@@ -14,13 +14,13 @@
     <img class="markdown-image" src="https://panolam.com/wp-content/uploads/2022/09/GRID-OVERLAY-04-600x601.jpg" alt="Grid"></p>
     
     <p class="markdown-p markdown-numeration"><span class="markdown-number">2-</span> At every corner of the grid, assign a unit vector (a vector of length 1) → These gradients influence the output noise values<br></p>
-    <img class="markdown-image" src="/media/blog/perlin_noise/vectors.png" alt="vectors">
+    <img class="markdown-image" src="media/blog/perlin_noise/vectors.png" alt="vectors">
     <p class="markdown-p markdown-numeration"><span class="markdown-number">3-</span> Calculate the noise for a point:<br>
     Given an input point (x, y), Perlin Noise returns an output ranging from 0 to 1. For example:</p>
     <pre class="markdown-code"><code class="language-ts">function noise(x: number, y:number): number {}
     </code></pre>
     <p class="markdown-p markdown-numeration"><span class="markdown-number">4-</span> Identify which grid square the input point lies within. The corners of the square are integers, while the input point's coordinates are floats.</p>
-    <img class="markdown-image" src="/media/blog/perlin_noise/floats_ints.png" alt="floats and ints">
+    <img class="markdown-image" src="media/blog/perlin_noise/floats_ints.png" alt="floats and ints">
     <p class="markdown-p">So we start by getting the values of the corners of the square we are in:</p>
     <pre class="markdown-code"><code class="language-ts">// The left top and bottom corners
     const x_l = Math.floor(x) &amp; 255;
@@ -44,7 +44,7 @@
     const yf_b = y - y_b;
     </code></pre>
     <p class="markdown-p markdown-numeration">5<span class="markdown-number">5-</span> Compute the dot product between the the hash of the corner's gradient vector and the vector pointing from the corner to the input point.</p>
-    <p class="markdown-p"><img class="markdown-image" src="/media/blog/perlin_noise/dot_product.png" alt="dot product"></p>
+    <p class="markdown-p"><img class="markdown-image" src="media/blog/perlin_noise/dot_product.png" alt="dot product"></p>
     <p class="markdown-p">The dot product is defined mathematically:<br><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>A</mi><mo>⃗</mo></mover><mi mathvariant="normal">.</mi><mover accent="true"><mi>B</mi><mo>⃗</mo></mover><mo>=</mo><mi mathvariant="normal">∣</mi><mi>A</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>B</mi><mi mathvariant="normal">∣</mi><mtext>  </mtext><mi>c</mi><mi>o</mi><mi>s</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vec{A}.\vec{B}=|A||B|\;cos(\theta)</annotation></semantics></math></span><span class="katex-html"><span class="base"><span class="strut" style="height:0.9663em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">A</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.0966em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
     3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
     10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
