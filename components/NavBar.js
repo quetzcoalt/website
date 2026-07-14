@@ -93,6 +93,8 @@ class NavBar extends HTMLElement {
     }
 
     connectedCallback() {
+        const basePath = this.getAttribute('base-path') || '.';
+        
         const menuBtn = this.querySelector(".mobile-menu-btn");
         const closeBtn = this.querySelector(".close-btn");
         const overlay = this.querySelector(".background-overlay");
