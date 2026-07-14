@@ -7,7 +7,7 @@ class NavBar extends HTMLElement {
 <nav class="navigation">
     <!-- Logo -->
     <div class="nav-logo">
-        <a class="logo-link" href="/index.html">
+        <a class="logo-link" href="index.html">
             <img class="sun-image" src='media/sun.png' />
         </a>
     </div>
@@ -33,23 +33,23 @@ class NavBar extends HTMLElement {
             <ul class="desktop-nav-list">
                 <li>
                     <img class="folder-img" src='media/icons/folder.gif' />
-                    <a class="nav-element" href="/index.html">/about_me;</a>
+                    <a class="nav-element" href="index.html">/about_me;</a>
                 </li>
                 <li>
                     <img class="folder-img" src='media/icons/folder.gif' />
-                    <a class="nav-element" href="/pages/codebase.html">/codebase;</a>
+                    <a class="nav-element" href="pages/codebase.html">/codebase;</a>
                 </li>
                 <li>
                     <img class="folder-img" src='media/icons/folder.gif' />
-                    <a class="nav-element" href="/pages/blog.html">/blog;</a>
+                    <a class="nav-element" href="pages/blog.html">/blog;</a>
                 </li>
                 <li>
                     <img class="folder-img" src='media/icons/folder.gif' />
-                    <a class="nav-element" href="/pages/now.html">/now;</a>
+                    <a class="nav-element" href="pages/now.html">/now;</a>
                 </li>
                 <li>
                     <img class="folder-img" src='media/icons/folder.gif' />
-                    <a class="nav-element" href="/pages/gallery.html">/gallery;</a>
+                    <a class="nav-element" href="pages/gallery.html">/gallery;</a>
                 </li>
             </ul>
         </div>
