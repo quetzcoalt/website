@@ -36,7 +36,7 @@ class NavBar extends HTMLElement {
                         <ul class="desktop-nav-list">
                             <li>
                                 <img class="folder-img" src='${basePath}/media/icons/folder.gif' />
-                                <a class="nav-element" href="index.html">/about_me;</a>
+                                <a class="nav-element" href="${basePath}/index.html">/about_me;</a>
                             </li>
                             <li>
                                 <img class="folder-img" src='${basePath}/media/icons/folder.gif' />

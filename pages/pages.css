@@ -663,10 +663,10 @@ book-lib {
 }
 
 .uncategorized-p {
-    border: #d87093 2px solid;
-    border-radius: 10px;
+    border: #d292fd 2px solid;
+    /* border-radius: 10px; */
     padding: 10px;
-    background-color: #ff97ba;
+    /* background-color: #ff97ba; */
 }
 
 /* ----------------- BLOG CARD ----------------------- */
