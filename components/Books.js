@@ -3,8 +3,8 @@ class Books extends HTMLElement {
         super()
 
         this.books =[
-            { id: 0, cover: "vies.jpg", title: "Incognito", author: "David Eagleman" },
-            { id: 1, cover: "evolution.jpg", title: "Why Evolution is True", author: "Jerry A. Coyne" }
+            { id: 0, cover: "pi.jpg", title: "Learning Computer Architecture with Raspberry Pi", author: "Eben Upton, Jeff Duntemann" },
+            { id: 1, cover: "rougenoir.jpg", title: "Le Rouge et Le Noir", author: "Stendhal" }
         ]
     
         this.innerHTML = `
@@ -12,7 +12,7 @@ class Books extends HTMLElement {
             ${this.books.map((book) => `
                 <div data-id=${book.id} class="book">
                     <p class="book-title">${book.title}</p>
-                    <img class="book-cover" src="media/books/${book.cover}" >
+                    <img class="book-cover" src="../media/books/${book.cover}" >
                     <p class="book-author">- ${book.author} -</p>
                 </div>
             `).join('')}
