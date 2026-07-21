@@ -4,7 +4,7 @@ class Books extends HTMLElement {
 
         this.books =[
             { id: 0, cover: "pi.jpg", title: "Learning Computer Architecture with Raspberry Pi", author: "Eben Upton, Jeff Duntemann" },
-            { id: 1, cover: "rougenoir.jpg", title: "Le Rouge et Le Noir", author: "Stendhal" }
+            { id: 1, cover: "marcopolo.jpg", title: "La Malédiction de Marco Polo", author: "James Rollins" }
         ]
     
         this.innerHTML = `
