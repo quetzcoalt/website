@@ -28,17 +28,15 @@
             </div>
             <div class="codebase" id="codebase"></div>
         </div>
-    <script type="module" src="../components/Code.js"></script>
-
-    <script>
-    if (window.location.hostname.includes('github.io') && window.location.pathname.includes('/blogs/')) {
-        document.querySelectorAll('img.markdown-image').forEach(img => {
-            const currentSrc = img.getAttribute('src');
-            if (currentSrc && currentSrc.startsWith('/media/')) {
-                img.setAttribute('src', '/website' + currentSrc);
-            }
-        });
-    }
-</script>
+    <script type="module" src="../components/Code.js">
+        if (window.location.hostname.includes('github.io')) {
+            document.querySelectorAll('img.markdown-image').forEach(img => {
+                const currentSrc = img.getAttribute('src');
+                if (currentSrc && currentSrc.startsWith('/media/')) {
+                    img.setAttribute('src', '/website' + currentSrc);
+                }
+            });
+        }
+    </script>
 </body>
 </html>

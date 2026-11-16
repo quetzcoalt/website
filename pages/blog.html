@@ -30,5 +30,17 @@
             <blog-page></blog-page>
 
         </div>
+    </div>
+
+    <script>
+        if (window.location.hostname.includes('github.io')) {
+            document.querySelectorAll('img.markdown-image').forEach(img => {
+                const currentSrc = img.getAttribute('src');
+                if (currentSrc && currentSrc.startsWith('/media/')) {
+                    img.setAttribute('src', '/website' + currentSrc);
+                }
+            });
+        }
+    </script>
 </body>
 </html>
