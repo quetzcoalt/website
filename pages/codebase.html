@@ -16,7 +16,7 @@
               -> I mostly learn through project-based learning. This approach helps me understand concepts better and keeps me motivated to build more.
             </h3>
             <div class="divider-div">
-                <img class="divider" src="/media/dividers/thorndivider.gif" alt="">
+                <img class="divider img-source" src="/media/dividers/thorndivider.gif" alt="">
             </div> 
             <div class="about-wrapper">
                 <div class="bar"></div>
@@ -30,7 +30,7 @@
         </div>
     <script type="module" src="../components/Code.js">
         if (window.location.hostname.includes('github.io')) {
-            document.querySelectorAll('img.markdown-image').forEach(img => {
+            document.querySelectorAll('img.img-source').forEach(img => {
                 const currentSrc = img.getAttribute('src');
                 if (currentSrc && currentSrc.startsWith('/media/')) {
                     img.setAttribute('src', '/website' + currentSrc);

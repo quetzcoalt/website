@@ -23,7 +23,7 @@
                 <span class="about-title">
                     <span class="caret-deco">&gt;</span> Blog
                 </span>
-                <img src="/media/gifs/clippy.gif" alt="">
+                <img class="img-source" src="/media/gifs/clippy.gif" alt="">
                 <div class="bar"></div>
             </div>
 
@@ -34,7 +34,7 @@
 
     <script>
         if (window.location.hostname.includes('github.io')) {
-            document.querySelectorAll('img.markdown-image').forEach(img => {
+            document.querySelectorAll('img.markdown-source').forEach(img => {
                 const currentSrc = img.getAttribute('src');
                 if (currentSrc && currentSrc.startsWith('/media/')) {
                     img.setAttribute('src', '/website' + currentSrc);

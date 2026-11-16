@@ -49,9 +49,9 @@
     <li class="markdown-p"><u>Power Supply</u>: +5 V DC;</li>
     </ul>
     <p class="markdown-p">Image of the front:<br>
-    <img class="markdown-image" src="/media/blogs/servobin/sensor-front.jpg" alt="Front Image of the Sensor"></p>
+    <img class="markdown-image img-source" src="/media/blogs/servobin/sensor-front.jpg" alt="Front Image of the Sensor"></p>
     <p class="markdown-p">The back:<br>
-    <img class="markdown-image" src="/media/blogs/servobin/sensor-back.jpg" alt="Back Image of the Sensor">
+    <img class="markdown-image img-source" src="/media/blogs/servobin/sensor-back.jpg" alt="Back Image of the Sensor">
     <br>Such a beauty, right?</p>
     <h1 class="markdown-title markdown-h1" id="step-2-the-actual-code">Step 2: The actual code</h1>
     <p class="markdown-p">I will open the Arduino IDE and start by assigning the pins:</p>
@@ -78,7 +78,7 @@
     </span>Servo servo;
     </code></pre>
     <p class="markdown-p">(Spoiler alert) Here is the servo motor I will be using:
-    <img class="markdown-image" src="/media/blogs/servobin/servo.jpg" alt="Servo Motor"></p>
+    <img class="markdown-image img-source" src="/media/blogs/servobin/servo.jpg" alt="Servo Motor"></p>
     <p class="markdown-p">Now, the <code>setup()</code>:</p>
     <pre class="markdown-code"><code class="lang-c"><span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">begin</span>(<span class="hljs-number">9600</span>);
 
@@ -127,11 +127,22 @@
     <pre class="markdown-code"><code class="lang-c"><span class="hljs-attribute">servoPos</span> = <span class="hljs-number">180</span><span class="hljs-comment">;</span>
     </code></pre>
     <p class="markdown-p">AND TADAAAAA!<br>
-    <img class="markdown-image" src="/media/blogs/servobin/final-result.jpg" alt="Final Result"></p>
+    <img class="markdown-image img-source" src="/media/blogs/servobin/final-result.jpg" alt="Final Result"></p>
     <p class="markdown-p">A video demo:</p>
     <video controls>
         <source src="/media/blogs/servobin/video-result.mp4" type="video/mp4">
     </video>
     <p class="markdown-p">The end ...</p>
+
+    <script>
+        if (window.location.hostname.includes('github.io')) {
+            document.querySelectorAll('img.img-source').forEach(img => {
+                const currentSrc = img.getAttribute('src');
+                if (currentSrc && currentSrc.startsWith('/media/')) {
+                    img.setAttribute('src', '/website' + currentSrc);
+                }
+            });
+        }
+    </script>
 </body>
 </html>

@@ -27,7 +27,7 @@
                 <!-- <span class="about-title">
                     <span class="caret-deco">&gt;</span> Media
                 </span> -->
-                <img src="/media/gifs/radio.gif" alt="">
+                <img class="img-source" src="/media/gifs/radio.gif" alt="">
                 <div class="bar"></div>
             </div>
 
@@ -37,7 +37,7 @@
                 <!-- Music -->
                 <div class="music">
                     <div class="media-title" className="bg-violet-500 p-4 mt-4 rounded-md">
-                        <img src="/media/gifs/cd.gif" alt="">
+                        <img class="img-source" src="/media/gifs/cd.gif" alt="">
                         <h3 class="media-type">Music</h3>
                     </div>
 
@@ -61,7 +61,7 @@
                 <!-- Books -->
                 <div class="music">
                     <div class="media-title" className="bg-violet-500 p-4 mt-4 rounded-md">
-                        <img src="/media/gifs/cd.gif" alt="">
+                        <img class="img-source" src="/media/gifs/cd.gif" alt="">
                         <h3 class="media-type">Books</h3>
                     </div>
 
@@ -79,7 +79,7 @@
              <div class="media-corner">
                 <div class="music">
                     <div class="media-title" className="bg-violet-500 p-4 mt-4 rounded-md">
-                        <img src="/media/gifs/cd.gif" alt="">
+                        <img class="img-source" src="/media/gifs/cd.gif" alt="">
                         <h3 class="media-type">"Projects"</h3>
                     </div>
 
@@ -102,5 +102,15 @@
              </div>
 
         </div>
+    <script>
+         if (window.location.hostname.includes('github.io')) {
+            document.querySelectorAll('img.img-source').forEach(img => {
+                const currentSrc = img.getAttribute('src');
+                if (currentSrc && currentSrc.startsWith('/media/')) {
+                    img.setAttribute('src', '/website' + currentSrc);
+                }
+            });
+        }
+    </script>
 </body>
 </html>

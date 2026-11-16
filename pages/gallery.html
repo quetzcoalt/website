@@ -23,7 +23,7 @@
                 <span class="about-title">
                     <span class="caret-deco">&gt;</span> Misc
                 </span>
-                <img src="/media/icons/telescope.gif" alt="">
+                <img class="img-source" src="/media/icons/telescope.gif" alt="">
                 <div class="bar"></div>
             </div>
 
@@ -42,7 +42,7 @@
                 <span class="about-title">
                     <span class="caret-deco">&gt;</span> My other live websites:
                 </span>
-                <img src="/media/gifs/computer.gif" alt="">
+                <img class="img-source" src="/media/gifs/computer.gif" alt="">
                 <div class="bar"></div>
             </div>
             
@@ -52,5 +52,15 @@
 
             <img class="under-construction" src="/media/gifs/under_construction.gif" alt="">
         </div>
+    <script>
+         if (window.location.hostname.includes('github.io')) {
+            document.querySelectorAll('img.img-source').forEach(img => {
+                const currentSrc = img.getAttribute('src');
+                if (currentSrc && currentSrc.startsWith('/media/')) {
+                    img.setAttribute('src', '/website' + currentSrc);
+                }
+            });
+        }
+    </script>
 </body>
 </html>
