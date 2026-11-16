@@ -287,7 +287,7 @@
 }
 
 .about-header:hover {
-    background-color: rgb(78, 78, 31);
+    background-color: rgb(136, 59, 136);
 }
 
 .determination {
@@ -307,27 +307,27 @@
  }
 
 
-@media (prefers-color-scheme: dark) {
-    /* ABOUT SECTION */
+/* @media (prefers-color-scheme: dark) {
+    ABOUT SECTION
     .main-body {
         color: var(--gray-300);
     }
 
-    /* Typewriter */
+    Typewriter
     .typewriter::before {
         background: var(--neutral-900);
     }
 
-    /* ABOUT MAIN */
+    ABOUT MAIN
     .about-main {
         color: var(--gray-200);
     }
 
-    /* LILY */
+    LILY
     .lily-picture {
         border-color: var(--zinc-500);
     }
-}
+} */
 
 @media (min-width: 1024px) {
     /* ABOUT SECTION */
@@ -662,11 +662,23 @@ book-lib {
     font-size: 1.4rem;
 }
 
-.uncategorized-p {
-    border: #d292fd 2px solid;
-    /* border-radius: 10px; */
+.uncategorized-sub {
+    border: #bd81e6 2px solid;
+    border-radius: 10px;
     padding: 10px;
-    /* background-color: #ff97ba; */
+    /* background-color: #f5a3be7e; */
+}
+
+.uncategorized-sub p {
+    margin-bottom: 10px;
+}
+
+.uncategorized-label {
+    padding: 5px;
+    background-color: var(--violet-400);
+    border-radius: 10px;
+    color: white;
+    font-family: monospace;
 }
 
 /* ----------------- BLOG CARD ----------------------- */
@@ -890,7 +902,7 @@ book-lib {
     color: var(--violet-500);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
     .intro-text {
         color: var(--gray-300)
     }
@@ -939,7 +951,7 @@ book-lib {
     .gallery-link {
         background-color: var(--zinc-800);
     }
-}
+} */
 
 @media (min-width: 768px) { 
     .intro-text {

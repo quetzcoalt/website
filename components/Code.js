@@ -1,11 +1,24 @@
 export const projects = [
   {
+    id: "6502 emulator",
+    name: "6502 emulator",
+    description:
+      "It's an 8-bit CPU capable of handling at most 64 Kb of memory via its 16-bit address bus.",
+    github: "https://github.com/quetzcoalt/6502-emulator",
+    details: [
+      "It implements all the registers.",
+      "Instructions cover all the addressing modes.",
+      "Each instruction pass > 30 test."
+    ],
+    technologies: ["Rust", "emulation", "cpu"],
+  },
+  {
     id: "trackatui",
     name: "Trackatui",
     description:
       "A music player in the terminal using Ratatui and Rodio.",
     github: "https://github.com/quetzcoalt/trackatui",
-    features: [
+    details: [
       "Title of the current track, default track being the first one on the file explorer list.",
       "A progression gauge.",
       "Elapsed time, current selected mode (Normal, Shuffle, Repeat), navigation state: Playlist and Toolkit (play, pause, forward ...etc.)."
@@ -18,7 +31,7 @@ export const projects = [
     description:
       "Trying to implement a basic parser combinator for strings, that I wanted to use for my lisp interpreter project, because I like doing everything from scratch",
     github: "https://github.com/quetzcoalt/parsenator",
-    features: [
+    details: [
       "Specific matchers that match a specific output",
       "General matches that succeed any valid input.",
       'Logical combinators (such as "or" and "and").',
@@ -33,7 +46,7 @@ export const projects = [
     description:
       "A lisp interpreter, because why not? it's a Racket-like lisp (since I love Racket).",
     github: "https://github.com/quetzcoalt/lisper",
-    features: [
+    details: [
       "Binary, unary, logical and comparison operations",
       "Conditionals.",
       "Function definitions and function calls.",
@@ -47,7 +60,7 @@ export const projects = [
     description:
       "A REPL POSIX compliant shell in Rust that's capable of interpreting shell commands, running external programs and some builtin commands.",
     github: "https://github.com/quetzcoalt/rshell",
-    features: [
+    details: [
       "Builtins: exit, echo, cat, type, cd, pwd.",
       "Navigation.",
       "Quoting.",
@@ -62,7 +75,7 @@ export const projects = [
     description:
       "A TypeScript program that evaluates mathematical expressions in infix notation and returns the result. It supports binary operations (+, -, *, /, ^) and unary operations (!, sin, cos, tan).",
     github: "https://github.com/quetzcoalt/calculators",
-    features: [
+    details: [
       "Tokenizer: Parses the input expression into individual tokens.",
       "Shunting Yard Algorithm: Converts infix expressions to RPN while handling operator precedence and associativity.",
       "RPN Evaluation with AST: Evaluates RPN expressions by constructing and collapsing an Abstract Syntax Tree.",
@@ -74,9 +87,9 @@ export const projects = [
     id: "pong",
     name: "Pong Game",
     description:
-      "A simple Pong game implemented in TypeScript. The game features two paddles and a ball that bounces around the screen. The objective is to score points by getting the ball past the opponent's paddle.",
+      "A simple Pong game implemented in TypeScript. The game details two paddles and a ball that bounces around the screen. The objective is to score points by getting the ball past the opponent's paddle.",
     github: "https://github.com/quetzcoalt/pong",
-    features: [
+    details: [
       "Two Paddles: Controls for moving paddles up and down.",
       "Ball Mechanics: The ball bounces off paddles and walls.",
       "Scoring System: Tracks and displays scores for both players.",
@@ -91,7 +104,7 @@ export const projects = [
     description:
       "This is an Obsidian plugin that turns your favourite HTML snippets into reusable piece of code without the need to type them each time. It's already submitted, waiting for approval, but it works like magic. I use it on a daily basis!",
     github: "https://github.com/quetzcoalt/wrap-w-html",
-    features: ["Save your favourite HTML and inline CSS styling."],
+    details: ["Save your favourite HTML and inline CSS styling."],
     technologies: ["TypeScript", "Obsidian", "Plugin"],
   },
   {
@@ -100,7 +113,7 @@ export const projects = [
     description:
       "A TypeScript-based Express application with built-in middleware for security, logging, and compression. It is designed for scalability and ease of integration with various controllers.",
     github: "https://github.com/quetzcoalt/node-api",
-    features: [
+    details: [
       "Middleware Integration: Uses helmet for security, cors for cross-origin resource sharing, morgan for logging, and compression for response bodies size reduction.",
       "Database Connection: Connects to MongoDB using Mongoose.",
       "Controller-Based Routing: Routes requests through specified controllers.",
@@ -122,7 +135,7 @@ export const projects = [
       "A Three.js-based solar system simulation showcasing the planets and their orbits. ",
     github: "https://github.com/quetzcoalt/solarystem",
     demo: "https://quetzcoalt.github.io/solarSystem/",
-    features: [
+    details: [
       "Planetary Visualization: Displays planets with textures and accurate scaling.",
       "Interactive Controls: Allows user interaction to explore the solar system with orbit controls.",
       "Real-Time Animation: Planets and orbits animate continuously to simulate movement.",
@@ -135,7 +148,7 @@ export const projects = [
     description:
       "A collection of simple games implemented in C using the ncurses library. It includes classic games like Snake and a retro racing game.",
     github: "https://github.com/quetzcoalt/mini-games",
-    features: [
+    details: [
       "Snake Game: Navigate a growing snake to eat fruit while avoiding collisions with boundaries and itself.",
       "Retro Racer: Control a car and avoid enemy cars in an ASCII art-based racing game.",
     ],
@@ -146,7 +159,7 @@ export const projects = [
     name: "Rubik's Cube",
     description: "An interactive Three.js Rubik's cube.",
     github: "https://github.com/quetzcoalt/rubik-s",
-    features: [
+    details: [
       "Dynamic grid of colored cubes.",
       "Support for dragging and rotating cubes.",
       "Interaction through mouse events.",
@@ -177,7 +190,7 @@ class CodeCard extends HTMLElement {
     const github = this.getAttribute("github") || "";
     const demo = this.getAttribute("demo");
 
-    const features = JSON.parse(this.getAttribute("features") || "[]");
+    const details = JSON.parse(this.getAttribute("details") || "[]");
     const technologies = JSON.parse(this.getAttribute("technologies") || "[]");
 
     this.innerHTML = `
@@ -197,13 +210,13 @@ class CodeCard extends HTMLElement {
         <div class="second-section">
           <p>${description}</p><br/>
 
-          <p>&gt; Features:</p>
+          <p>&gt; Details:</p>
           <ul>
-            ${features.map(f => `<li class="enum-list">- ${f}</li>`).join("")}
+            ${details.map(f => `<li class="enum-list">- ${f}</li>`).join("")}
           </ul>
 
           ${
-            id == "trackatui" ? `<img style = "margin-top: 20px" src="media/projects/${id}.png" />` : ""}
+            id == "trackatui" ? `<img style = "margin-top: 20px" src="/media/projects/${id}.png" />` : ""}
 
           <div class="technologies">
             ${technologies.map(t => `<span class="technology">${t}</span>`).join(" ")}
@@ -231,7 +244,7 @@ projects.forEach(project => {
   card.setAttribute("name", project.name);
   card.setAttribute("description", project.description);
   card.setAttribute("github", project.github);
-  card.setAttribute("features", JSON.stringify(project.features));
+  card.setAttribute("details", JSON.stringify(project.details));
   card.setAttribute("technologies", JSON.stringify(project.technologies));
 
   if (project.demo) {
