@@ -21,7 +21,7 @@ class Blog extends HTMLElement {
                 content: "Fractals",
             },
             {
-                id: "PerlinNoise",
+                id: "perlinnoise",
                 title: "Perlin Noise",
                 date: "19/11/2024",
                 category: ["Terrain Generation", "Three.js", "3D"],    
