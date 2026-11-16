@@ -5,8 +5,8 @@ class MusicPlayer extends HTMLElement {
     this.audio = new Audio();
     this.currentIndex = 0;
     this.songs = [
-      { id: 0, link: "media/songs/X_vs_Zero_Decisive_Battle_2_Soundtrack.mp3", name: "X vs Zero Decisive Battle 2", artist: "Breis", image: "xvszero.jpg" },
-      { id: 1, link: "media/songs/Megaman_X_5.mp3", name: "Megaman X5 Intro", artist: "Unknown", image: "megaman_x5.jpg" },
+      { id: 0, link: "/media/songs/X_vs_Zero_Decisive_Battle_2_Soundtrack.mp3", name: "X vs Zero Decisive Battle 2", artist: "Breis", image: "xvszero.jpg" },
+      { id: 1, link: "/media/songs/Megaman_X_5.mp3", name: "Megaman X5 Intro", artist: "Unknown", image: "megaman_x5.jpg" },
     ];
 
     this.render();
