@@ -8,9 +8,27 @@
     --violet-300: #bca7f4;
     --violet-400: #a783f2;
     --violet-500: #915eef;
-    --violet-600: #7c3aed;
+    --violet-600: var(--pink-600);
     --violet-700: #6e34d3;
     --violet-800: #602db8;
+
+    --pink-100: #FCE7F3;
+    --pink-200: #FFFFFF;
+    --pink-300: #FDA5D5;
+    --pink-400: #FB64B6;
+    --pink-500: #F6339A;
+    --pink-600: #E60076;
+    --pink-700: #C6005C;
+    --pink-800: #A3004C;
+
+    --yellow-100: #FEF9C2;
+    --yellow-200: #FFF085;
+    --yellow-300: #FFDF20;
+    --yellow-400: #FDC700;
+    --yellow-500: #F0B100;
+    --yellow-600: #D08700;
+    --yellow-700: #A65F00;
+    --yellow-800: #894B00;
 
     --zinc-500: #71717a;
     --zinc-700: #464649;
@@ -49,7 +67,7 @@
 
 ::-moz-selection {
   color: #fff;
-  background: #7c3aed;
+  background: var(--pink-600);
 }
 
 @keyframes crab {
@@ -143,7 +161,7 @@
 }
 
 .symbol-accent {
-    color: #7c3aed;     /* violet-600 */
+    color: var(--pink-600);     /* violet-600 */
 }
 
 /* =========================
@@ -226,7 +244,7 @@
 ========================= */
 
 .sitemap-card {
-  border: 2px solid #7c3aed; /* violet-600 */
+  border: 2px solid var(--pink-600); /* violet-600 */
   border-radius: 0.5rem;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(4px); /* blur-sm */
@@ -235,7 +253,7 @@
 }
 
 .sitemap-header {
-  background-color: #f578cf;
+  background-color: var(--pink-400);
   color: #fff;
   padding: 0.5rem 0.75rem;
   display: flex;
@@ -255,8 +273,76 @@
 }
 
 .win-btn {
-    display: flex; 
-    gap: 8px;
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 15px;
+    gap: 2px;
+}
+
+.other-win-btn {
+    background-color: var(--violet-600);
+    padding: 1px 8px;
+    border: solid rgba(255, 255, 255, 0.582) 1px;
+    color: white;
+    font-weight: bolder;
+    border-radius: 5px;
+}
+
+.close-win-btn {
+    background-color: var(--yellow-300);
+    padding: 3px 8px;
+    color: var(--yellow-800);
+    border-radius: 5px;
+}
+
+.about-comments {
+    border: 1px dashed black;
+    font-size: 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+/* =========================
+   STATE CARD
+========================= */
+
+.state-panel {
+    background-color: var(--yellow-200);
+    border: dashed var(--yellow-700) 2px;
+    padding: 5px 0 5px 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+
+    font-size: 15px;
+    transition: color 200ms ease;
+    text-decoration: none;
+    color: black;
+    font-family: monospace;
+}
+
+.state-description {
+    font-size: 18px;
+    transition: color 200ms ease;
+    text-decoration: none;
+    color: black;
+    font-family: monospace;
+}
+
+/* =========================
+   BUTTONS LIST
+========================= */
+
+.buttons-list {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.about-comments {
+    padding: 5px;
 }
 
 /* =========================
@@ -283,11 +369,11 @@
 }
 
 .nav-element:active {
-    color: #7c3aed;
+    color: var(--pink-600);
 }
 
 .nav-element-clicked {
-    color: #7c3aed;
+    color: var(--pink-600);
 }
 
 /* =========================
@@ -315,7 +401,7 @@
 }
 
 .nav-element-small:hover {
-    color: #7c3aed;
+    color: var(--pink-600);
 }
 
 /* =========================
@@ -333,7 +419,7 @@
 
 .mobile-menu-btn {
     cursor: pointer;
-    color: #d1d5db;
+    color: black;
 }
 
 @media (min-width: 768px) { 
@@ -390,7 +476,7 @@
 
 .close-btn {
     cursor: pointer;
-    color: #d1d5db;
+    color: #000102;
 }
 
 .close-span {

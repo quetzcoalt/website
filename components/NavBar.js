@@ -16,7 +16,7 @@ class NavBar extends HTMLElement {
                 </div>
 
                 <!-- Image (desktop only) -->
-                <img class="nav-image" src="${basePath}/media/ascii.png" alt="galaxy" />
+                <img class="nav-image" src="${basePath}/media/containers/desk_room.gif" alt="galaxy" />
 
                 <!-- Desktop Navigation -->
                 <div class="sitemap-card">
@@ -26,9 +26,8 @@ class NavBar extends HTMLElement {
                             <span class="sitemap-filename">sitemap.txt</span>
                         </span>
                         <div class="win-btn" className="flex space-x-2 mr-3">
-                            <div>-</div>
-                            <div>□</div>
-                            <div>x</div>
+                            <div class="other-win-btn">-</div>
+                            <div class="close-win-btn">x</div>
                         </div>
                     </div>
 
@@ -59,6 +58,66 @@ class NavBar extends HTMLElement {
                 </div>
 
                 <img class="cat-img" src='${basePath}/media/characters/laptop-cat.gif' />
+
+                /* CURRENT STATE */
+                <div class="sitemap-card">
+                    <div class="sitemap-header">
+                        <span class="sitemap-title">
+                            <img src="${basePath}/media/gifs/state.gif" alt="hobbies" />
+                            <span class="sitemap-filename">state.txt</span>
+                        </span>
+                        <div class="win-btn" className="flex space-x-2 mr-3">
+                            <div class="other-win-btn">-</div>
+                            <div class="close-win-btn">x</div>
+                        </div>
+                    </div>
+
+                    <div class="nav-list">
+                        <ul class="desktop-nav-list">
+                            <li>
+                                <p class="state-description">Feeling:</p>
+                                <div class="state-panel">
+                                    <span><img src="${basePath}/media/icons/sonic-peelout.png"></span> Inspired
+                                </div>
+                            </li>
+                            <li>
+                                <p class="state-description">Currently doing:</p>
+                                <div class="state-panel">
+                                    <span><img src="${basePath}/media/icons/death-note-l.png"></span>Thinking about what should I do next.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                /* BUTTONS */
+                <div class="sitemap-card">
+                    <div class="sitemap-header">
+                        <span class="sitemap-title">
+                            <img src="${basePath}/media/gifs/hobbies.png" alt="hobbies" />
+                            <span class="sitemap-filename">buttons.txt</span>
+                        </span>
+                        <div class="win-btn" className="flex space-x-2 mr-3">
+                            <div class="other-win-btn">-</div>
+                            <div class="close-win-btn">x</div>
+                        </div>
+                    </div>
+
+                    <div class="about-comments">The comments above are intentional.</div>
+
+                    <div class="buttons-list">
+                        <img class="button-img" src="${basePath}/media/buttons/2001.gif" alt="button" />
+                        <img class="button-img" src="${basePath}/media/buttons/future-corpse.gif" alt="button" />
+                        <img class="button-img" src="${basePath}/media/buttons/get-computer.jpg" alt="button" />
+                        <img class="button-img" src="${basePath}/media/buttons/google-chrome-is-evil.png" alt="button" />
+                        <img class="button-img" src="${basePath}/media/buttons/internet-archive.gif" alt="button" />
+                        <img class="button-img" src="${basePath}/media/buttons/learn-html.gif" alt="button" />
+                        <img class="button-img" src="${basePath}/media/buttons/like-computer.jpg" alt="button" />
+                        <img class="button-img" src="${basePath}/media/buttons/site-always-under-construction.png" alt="button" />
+                        <img class="button-img" src="${basePath}/media/buttons/void.gif" alt="button" />
+                    </div>
+                </div>
+
 
                 <!-- Mobile Menu -->
                 <div class="mobile-menu">
